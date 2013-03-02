@@ -13,4 +13,4 @@ class ConsumerProducer(threading.Thread):
 
     def run(self):
         for line in tail(self.fname):
-            self.redis.lpush('data', self.regex.search(line).match('protocol'))
+            self.redis.lpush('data', self.regex.search(line).group('protocol'))
