@@ -9,7 +9,7 @@ class ConsumerProducer(threading.Thread):
         super(ConsumerProducer, self).__init__()
         self.redis = redis.StrictRedis()
         self.fname = fname
-        self.regex = re.compile(u'^.* -> (?:ff\.\S*)? \s* (?P<protocol>\w+)')
+        self.regex = re.compile(u'^.* -> (?:[\w-]*:\S*)? \s* (?P<protocol>\w+)')
 
     def run(self):
         for line in tail(self.fname):
