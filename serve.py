@@ -1,4 +1,5 @@
 import sys
+import json
 import redis
 from store import ConsumerProducer
 from bottle import route, run, template, static_file
@@ -9,7 +10,7 @@ redis = redis.StrictRedis()
 def index(): 
     return template("index.html")
 
-@route('data')
+@route('/data')
 def data():
     data = redis.lrange('data', 0, -1)
     redis.delete('data')
