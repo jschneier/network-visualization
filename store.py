@@ -9,8 +9,9 @@ class ConsumerProducer(threading.Thread):
         super(ConsumerProducer, self).__init__()
         self.redis = redis.StrictRedis()
         self.fname = fname
-        self.regex = re.compile(u'^.* -> (?:[\w-]*:\S*)? \s* (?P<protocol>\w+)')
+        self.regex = re.compile(r'^.* -> (?:\S*)\s*(?P<protocol>\w+)')
 
     def run(self):
         for line in tail(self.fname):
-            self.redis.lpush('data', self.regex.search(line).group('protocol'))
+            match = self.regex.match(line)
+            self.redis.lpush('data', match.group('protocol'))
