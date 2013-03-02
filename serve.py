@@ -1,7 +1,10 @@
 import sys
 import redis
+import os.path
 from store import ConsumerProducer
 from bottle import route, run, template, static_file
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
 
 redis = redis.StrictRedis()
 
@@ -17,11 +20,11 @@ def data():
 
 @route('/lib/<filename>')
 def serve_lib(filename):
-    return static_file(filename, root='/home/jschneier/hackathon/one-hackathon/lib')
+    return static_file(filename, root=ROOT)
 
 @route('/src/<filename>')
 def serve_src(filename):
-    return static_file(filename, root='/home/jschneier/hackathon/one-hackathon/src')
+    return static_file(filename, root=ROOT)
 
 if __name__ == '__main__':
     fname = sys.argv[1]
