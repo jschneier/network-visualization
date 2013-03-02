@@ -1,4 +1,5 @@
 import re
+import sys
 import redis
 import multiprocessing
 from tail import tail
@@ -13,5 +14,8 @@ class ConsumerProducer(multiprocessing.Process):
 
     def run(self):
         for line in tail(self.fname):
-            match = self.regex.match(line)
-            self.redis.lpush('data', match.group('protocol'))
+            try:
+                match = self.regex.match(line)
+                self.redis.lpush('data', match.group('protocol'))
+            except AttributeError:
+                print >>sys.stderr, line,
