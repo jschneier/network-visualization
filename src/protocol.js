@@ -42,7 +42,7 @@ function poll() {
     success: function(data) {
       addData(data);
       update();
-      setTimeout(poll
+      setTimeout(poll,
         500);
     }
 
