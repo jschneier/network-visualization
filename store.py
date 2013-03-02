@@ -1,15 +1,15 @@
 import re
 import redis
-import threading
+import multiprocessing
 from tail import tail
 
-class ConsumerProducer(threading.Thread):
+class ConsumerProducer(multiprocessing.Process):
 
     def __init__(self, fname):
         super(ConsumerProducer, self).__init__()
         self.redis = redis.StrictRedis()
         self.fname = fname
-        self.regex = re.compile(r'^.* -> (?:\S*)\s*(?P<protocol>\w+)')
+        self.regex = re.compile(r'^.* -> (?:\S*)\s*(?P<protocol>[\w-]+)')
 
     def run(self):
         for line in tail(self.fname):
