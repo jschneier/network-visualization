@@ -7,13 +7,14 @@ var data = [],
 
 function addData(newData) {
   for(var i=0; i < newData.length; i++) {
-    if (dataMap[newData[i]] == undefined) {
-      dataMap[newData[i]] = {count:1, index: dataIndex};
-      data[dataIndex] = dataMap[newData[i]]
+    var cur = newData[i];
+    if (dataMap.cur == undefined) {
+      dataMap.cur = {count:1, index: dataIndex};
+      data[dataIndex] = dataMap.cur;
       dataIndex++;
     }
    else {
-      data[newData[i].index].count++;
+      dataMap.cur.count++;
    }
   }
 };
