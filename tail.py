@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-import os
 import sys
 import time
+import os.path
 
 def tail(fname):
     try:
